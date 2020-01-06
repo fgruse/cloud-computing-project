@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Access denied</title>
+    <title>Flugdetails</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -11,7 +11,33 @@
 
 <body>
 <div class="container">
-    <h1>Flugdetails</h1>
+    <h1>Flugdetails <span th:utext="${userName}"></span></h1>
+    <div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Flugnummer</th>
+            <th scope="col">Airline</th>
+            <th scope="col">von</th>
+            <th scope="col">nach</th>
+            <th scope="col">Flugdatum</th>
+            <th scope="col">Uhrzeit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td> Flugnummer </td>
+            <td> Airline </td>
+            <td> von </td>
+            <td> bis </td>
+            <td> Flugdatum </td>
+            <td> UHrzeit</td>
+        </tr>
+
+        </tbody>
+    </table>
+    </div>
 </div>
+
 </body>
 </html>
