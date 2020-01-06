@@ -1,0 +1,6 @@
+---
+applications:
+  - name: config-server
+    buildpacks:
+      - java_buildpack
+    path: build/libs/config-server-0.0.1-SNAPSHOT.jar
