@@ -1,0 +1,6 @@
+---
+applications:
+  - name: service-discovery
+    buildpacks:
+      - java_buildpack
+    path: build/libs/service-discovery-0.0.1-SNAPSHOT.jar
