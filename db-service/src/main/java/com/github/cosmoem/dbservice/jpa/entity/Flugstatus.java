@@ -1,4 +1,4 @@
-package com.github.cosmoem.dbservice;
+package com.github.cosmoem.dbservice.jpa.entity;
 
 
 import javax.persistence.*;
@@ -7,8 +7,7 @@ import java.time.*;
 import java.util.Date;
 
 
-@Entity
-@Table(name = "flugstatus")
+@Entity(name = "flugstatus")
 public class Flugstatus {
 
     @Id
