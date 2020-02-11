@@ -1,17 +1,17 @@
 package com.github.cosmoem.uiservice.handlingformsubmission;
 
 public class Greeting {
-
-    private long id;
+    private long flugnummer;
     private String content;
 
-    public long getId() {
-        return id;
+    public long getFlugnummer() {
+        return flugnummer;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setFlugnummer(long flugnummer) {
+        this.flugnummer = flugnummer;
     }
+
 
     public String getContent() {
         return content;
