@@ -1,6 +1,6 @@
 package com.github.cosmoem.dbservice.web.rest;
 
-import com.github.cosmoem.dbservice.FlugstatusService;
+import com.github.cosmoem.dbservice.service.FlugstatusService;
 import com.github.cosmoem.dbservice.jpa.entity.Flugstatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +13,11 @@ public class FlugstatusController {
 
     @Autowired
     private FlugstatusService flugstatusService;
+
+    @RequestMapping("/flug")
+    public Iterable<Flugstatus> getAll() {
+        return flugstatusService.getAll();
+    }
 
     @RequestMapping("/flug/{flugnummer}")
     public Flugstatus getFlugstatus(@PathVariable(name = "flugnummer") String flugnummer) {

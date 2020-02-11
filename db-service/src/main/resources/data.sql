@@ -1,1 +1,0 @@
-INSERT INTO flugstatus (id, flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES (1, "AB459DZ", "Air Berlin", "Berlin", "New York", "2020-04-25", "18:20");

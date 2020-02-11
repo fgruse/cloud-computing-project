@@ -1,48 +1,30 @@
-package com.github.cosmoem.dbservice.jpa.entity;
+package com.github.cosmoem.dbservice.web.model;
 
-
-import javax.persistence.*;
-import java.util.Set;
-import java.time.*;
+import java.time.LocalTime;
 import java.util.Date;
 
+public class FlugstatusModel {
 
-@Entity(name = "flugstatus")
-public class Flugstatus {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(name = "flugnummer")
     private String flugnummer;
-
-    @Column(name = "airline")
     private String airline;
-
-    @Column(name = "von")
     private String von;
-
-    @Column(name = "nach")
     private String nach;
-
-    @Column(name = "flugdatum")
     private Date flugdatum;
-
-    @Column(name = "uhrzeit")
     private LocalTime uhrzeit;
 
-    public Flugstatus(final String flugnummer, final String airline, final String von, final String nach, final Date flugdatum, final LocalTime uhrzeit) {
+    public FlugstatusModel() {
+    }
+
+    public FlugstatusModel(final int id, final String flugnummer, final String airline, final String von, final String nach, final Date flugdatum,
+            final LocalTime uhrzeit) {
+        this.id = id;
         this.flugnummer = flugnummer;
         this.airline = airline;
         this.von = von;
         this.nach = nach;
         this.flugdatum = flugdatum;
         this.uhrzeit = uhrzeit;
-    }
-
-    public Flugstatus() {
-
     }
 
     public int getId() {
