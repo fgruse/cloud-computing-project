@@ -5,5 +5,11 @@ INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALU
 INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("JJK8865", "Lufthansa", "Berlin", "Hongkong", "2020-04-20", "14:45");
 INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("KKF8906", "Lufthansa", "Berlin", "Dubai", "2020-05-21", "20:05");
 INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("ABC1234", "Air France", "Berlin", "Maiami", "2020-04-17", "13:10");
-INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("JB007", "BritischAirways", "Berlin", "Cardiff", "2020-04-01", "08:50");
+INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("JB007", "British Airways", "Berlin", "Cardiff", "2020-04-01", "08:50");
 INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("GRI6543", "EasyJet", "Berlin", "Palma", "2020-07-01", "06:00");
+INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("T69KL5", "Eurowings", "Berlin", "Tokio", "2020-09-23", "03:10");
+INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("X87UL1", "Condor", "Berlin", "Rio de Janeiro", "2020-04-06", "12:15");
+INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("OS57LM", "Ryanair", "Berlin", "Amsterdam", "2020-04-20", "08:30");
+INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("EJU5907", "EasyJet", "Berlin", "Köln/Bonn", "2020-02-11", "05:50");
+INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("LX981", "Lufthansa", "Berlin", "Wien", "2020-07-09", "20:05");
+INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("BA8494", "British Airways", "Berlin", "Reykjavík", "2020-12-30", "01:45");
