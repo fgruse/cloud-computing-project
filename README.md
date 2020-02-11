@@ -9,13 +9,13 @@ Das Ziel war es, eine "sinnvolle" Anwendung zu entwickeln, die aus mindestens dr
 Dabei sollte außerdem eine Datenbank zum speichern von Daten verwendet werden sowie Spring Cloud Services wie z.B. Eureka oder Configuration Server und es sollten mindestens zwei Resilience-Patterns implementiert werden. 
 Die Anwendung sollte außerdem als eine Cloud-Anwendung konzipiert sein (IaaS oder PaaS) und gut skalierbar sein.
 
-# 2. Unsere Anwendung
-## 2.1 Beschreibung
+## 2. Unsere Anwendung
+### 2.1 Beschreibung
 Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehenden Flügen abrufen. Dazu muss er einfach die Flugnummer seines Fluges eingeben und erhält sofort Informationen über Datum, die operierende Fluggesellschaft, Abflugort, Ankunftsort und die Abflugszeit. Des weiteren wird natürlich der Flugstatus angezeigt: 'Cancelled', 'On Time', 'Delayed' oder falls die Information gerade einmal nicht verfügbar sein sollte 'Currently Not Available" ist. 
 
-## 2.2 Aufbau
+### 2.2 Aufbau
 
-### Micorservices
+#### Micorservices
 
 - UI-Service: User Interface
     - User kann anhand einer Flugnummer Informationen über Flüge abrufen
@@ -34,7 +34,7 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
     - Kommunikation mit API erfolgt über REST
     - Port 8989
 
-### Infrastrukturkomponenten
+#### Infrastrukturkomponenten
 
 - Service Discovery mit Eureka: erkennt laufende Microservices automatisch
     - Port 8761
@@ -43,19 +43,19 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
     - in den `bootstrap.properties` jedes Services wird der Port festgelegt
     - Port 8888
 
-### Resilience 
+#### Resilience 
 
 - implementiert mit Failsafe
 - Retries: TODO
 - Circuit Breaker: TODO
 
-### Cloud Infrastructure
+#### Cloud Infrastructure
 
 - Deployable mit CloudFoundry Dev: TODO
 - Skalierbarkeit: TODO
 
 
-## 2.3 Getting Started
+### 2.3 Getting Started
 
 1. Datenbank
 
