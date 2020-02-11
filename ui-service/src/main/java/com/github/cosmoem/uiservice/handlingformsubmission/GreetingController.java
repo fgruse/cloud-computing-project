@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class FlightController {
+public class GreetingController {
 
     @GetMapping("/greeting")
     public String greetingForm(Model model) {
