@@ -14,11 +14,6 @@ public class FlugstatusController {
     @Autowired
     private FlugstatusService flugstatusService;
 
-    @RequestMapping("/flug")
-    public Iterable<Flugstatus> getAll() {
-        return flugstatusService.getAll();
-    }
-
     @RequestMapping("/flug/{flugnummer}")
     public Flugstatus getFlugstatus(@PathVariable(name = "flugnummer") String flugnummer) {
         return flugstatusService.getFlugstatus(flugnummer);
