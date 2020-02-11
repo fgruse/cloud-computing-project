@@ -43,6 +43,10 @@ public class Flugstatus {
         this.uhrzeit = uhrzeit;
     }
 
+    public Flugstatus() {
+
+    }
+
     public int getId() {
         return id;
     }
