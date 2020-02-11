@@ -1,13 +1,45 @@
 <!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
+    <title>Flugstatus</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Result</h1>
-<p th:text="'id: ' + ${greeting.flugnummer}" />
-<p th:text="'content: ' + ${greeting.content}" />
-<a href="/greeting">Submit another message</a>
+<div class="container">
+    <h1>Flugdetails <span th:utext="${Flugnummer}"></span></h1>
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Flugnummer</th>
+                <th scope="col">Airline</th>
+                <th scope="col">von</th>
+                <th scope="col">nach</th>
+                <th scope="col">Flugdatum</th>
+                <th scope="col">Uhrzeit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td> ${flugnummer} </td>
+                <td> Air Berlin </td>
+                <td> Berlin </td>
+                <td> New York </td>
+                <td> 04.03.2020 </td>
+                <td> 18 Uhr </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<div>
+<a href="/greeting">Andere Flugnummer suchen</a>
+</div>
 </body>
 </html>
