@@ -12,7 +12,7 @@
 <body>
 <div class="container">
     <h1>Flugdetails</h1>
-    <p th:text="'Flugnummer: ' + ${greeting.flugnummer}" />
+    <p th:text="'Deine Flugnummer ist: ' + ${greeting.flugnummer}" />
     <div>
         <table class="table table-striped">
             <thead>
@@ -27,7 +27,7 @@
             </thead>
             <tbody>
             <tr>
-                <td> Flugnummer </td>
+                <td th:text="${greeting.flugnummer}"></td>
                 <td> Air Berlin </td>
                 <td> Berlin </td>
                 <td> New York </td>
