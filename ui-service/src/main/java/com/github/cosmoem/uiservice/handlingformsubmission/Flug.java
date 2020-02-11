@@ -10,11 +10,11 @@ public class Flug {
     private String airline;
     private String von;
     private String nach;
-    private Date flugdatum;
+    private String flugdatum;
     private LocalTime uhrzeit;
     private String flugstatus;
 
-    public Flug(final int id, final String flugnummer, final String airline, final String von, final String nach, final Date flugdatum,
+    public Flug(final int id, final String flugnummer, final String airline, final String von, final String nach, final String flugdatum,
             final LocalTime uhrzeit) {
         this.id = id;
         this.flugnummer = flugnummer;
@@ -69,11 +69,11 @@ public class Flug {
         this.nach = nach;
     }
 
-    public Date getFlugdatum() {
+    public String getFlugdatum() {
         return flugdatum;
     }
 
-    public void setFlugdatum(final Date flugdatum) {
+    public void setFlugdatum(final String flugdatum) {
         this.flugdatum = flugdatum;
     }
 
