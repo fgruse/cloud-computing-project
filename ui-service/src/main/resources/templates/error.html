@@ -10,11 +10,8 @@
     <div class="margin-top20 text-center">
         <p>Keine gültige Flugnummer. Bitte geben Sie eine gültige Flugnummer an.</p>
     </div>
-    <div>
-        <form action="#" th:action="@{/flug}" th:object="${flug}" method="post">
-            <p>Flugnummer: <input type="text" placeholder="AH67R45" th:field="*{flugnummer}" /></p>
-            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-        </form>
+    <div class="margin-top20 text-center">
+        <a href="/flug">Andere Flugnummer suchen</a>
     </div>
 </div>
 </body>
