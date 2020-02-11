@@ -13,8 +13,18 @@ public class Flug {
     private Date flugdatum;
     private LocalTime uhrzeit;
 
+    public String getFlugstatus() {
+        return flugstatus;
+    }
+
+    public void setFlugstatus(String flugstatus) {
+        this.flugstatus = flugstatus;
+    }
+
+    private String flugstatus;
+
     public Flug(final int id, final String flugnummer, final String airline, final String von, final String nach, final Date flugdatum,
-            final LocalTime uhrzeit) {
+            final LocalTime uhrzeit, final String flugstatus) {
         this.id = id;
         this.flugnummer = flugnummer;
         this.airline = airline;
@@ -22,6 +32,7 @@ public class Flug {
         this.nach = nach;
         this.flugdatum = flugdatum;
         this.uhrzeit = uhrzeit;
+        this.flugstatus = flugstatus;
     }
 
     public Flug() {
