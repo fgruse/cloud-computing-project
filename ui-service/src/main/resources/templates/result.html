@@ -28,11 +28,11 @@
             <tbody>
             <tr>
                 <td th:text="${flug.flugnummer}"></td>
-                <td> Air Berlin </td>
-                <td> Berlin </td>
-                <td> New York </td>
-                <td> 04.03.2020 </td>
-                <td> 18:20 </td>
+                <td th:text="${flug.airline}"></td>
+                <td th:text="${flug.von}"></td>
+                <td th:text="${flug.nach}"></td>
+                <td th:text="${flug.flugdatum}"></td>
+                <td th:text="${flug.uhrzeit}"></td>
             </tr>
 
             </tbody>
