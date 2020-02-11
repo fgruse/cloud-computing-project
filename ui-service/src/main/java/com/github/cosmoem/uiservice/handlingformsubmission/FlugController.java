@@ -21,12 +21,20 @@ public class FlugController {
     @PostMapping("/flug")
     public String flugSubmit(@ModelAttribute Flug flug) {
         Flug res = restTemplate.getForObject("http://localhost:8083/api/flug/{flugnummer}", Flug.class, flug.getFlugnummer());
-        flug.setAirline(res.getAirline());
-        flug.setFlugdatum(res.getFlugdatum());
-        flug.setNach(res.getNach());
-        flug.setVon(res.getVon());
-        flug.setUhrzeit(res.getUhrzeit());
-        return "result";
+        String status = restTemplate.getForObject("http://localhost:8989/api/status/{flugnummer}", String.class, flug.getFlugnummer());
+        if(res != null && status != null) {
+            flug.setAirline(res.getAirline());
+            flug.setFlugdatum(res.getFlugdatum());
+            flug.setNach(res.getNach());
+            flug.setVon(res.getVon());
+            flug.setUhrzeit(res.getUhrzeit());
+            flug.setFlugstatus(status);
+            return "result";
+        }
+        else {
+            return "failure";
+        }
+
     }
 
 }
