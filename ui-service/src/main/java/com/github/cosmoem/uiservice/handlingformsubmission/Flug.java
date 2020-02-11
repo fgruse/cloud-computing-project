@@ -1,6 +1,6 @@
 package com.github.cosmoem.uiservice.handlingformsubmission;
 
-public class Greeting {
+public class Flug {
     private String flugnummer;
     private String content;
 

@@ -13,7 +13,7 @@
 <h1>Flugstatus</h1>
 <h3>Geben Sie Ihre Flugnummer ein:</h3>
     <div>
-            <form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
+            <form action="#" th:action="@{/flug}" th:object="${flug}" method="post">
             <p>Flugnummer: <input type="text" placeholder="AH67R45" th:field="*{flugnummer}" /></p>
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
             </form>
