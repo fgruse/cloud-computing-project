@@ -2,9 +2,7 @@ package com.github.cosmoem.dbservice.jpa.entity;
 
 
 import javax.persistence.*;
-import java.util.Set;
 import java.time.*;
-import java.util.Date;
 
 
 @Entity(name = "flugstatus")
@@ -27,12 +25,12 @@ public class Flugstatus {
     private String nach;
 
     @Column(name = "flugdatum")
-    private Date flugdatum;
+    private String flugdatum;
 
     @Column(name = "uhrzeit")
     private LocalTime uhrzeit;
 
-    public Flugstatus(final String flugnummer, final String airline, final String von, final String nach, final Date flugdatum, final LocalTime uhrzeit) {
+    public Flugstatus(final String flugnummer, final String airline, final String von, final String nach, final String flugdatum, final LocalTime uhrzeit) {
         this.flugnummer = flugnummer;
         this.airline = airline;
         this.von = von;
@@ -42,7 +40,6 @@ public class Flugstatus {
     }
 
     public Flugstatus() {
-
     }
 
     public int getId() {
@@ -85,11 +82,11 @@ public class Flugstatus {
         this.nach = nach;
     }
 
-    public Date getFlugdatum() {
+    public String getFlugdatum() {
         return flugdatum;
     }
 
-    public void setFlugdatum(final Date flugdatum) {
+    public void setFlugdatum(final String flugdatum) {
         this.flugdatum = flugdatum;
     }
 
