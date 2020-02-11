@@ -1,0 +1,12 @@
+---
+applications:
+  - name: db-service
+    buildpacks:
+      - java_buildpack
+    path: build/libs/db-service-0.0.1-SNAPSHOT.jar
+    services:
+      - mysql
+    memory: 1GB
+    instance_limits:
+      min: 1
+      max: 1
