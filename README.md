@@ -47,12 +47,14 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
 
 - Monitoring & Health Check: mit Eureka
     - Mit Hilfe von Eureka werden nicht nur alle Services automatisch gefunden, sondern es wird auch überprüft, ob sie "gesund" sind/ laufen.
-- Circuit Breaker & Fallback & Timeout: implementiert mit Hystrix
+- Circuit Breaker & Fallback & Timeout: mit Hystrix
     - Falls die UI keine Informationen über den Flugstatus vom Data-Service bekommt, aber Verbindung zum DB-Service hergestellt werden kann, werden trotzdem die Fluginformationen angezeigt und statt des Flugstatus einfach "CURRENTLY NOT AVAILABLE" ausgegeben.
     - Falls die UI keine Verbindung zum DB-Service herstellen kann, kann auch nicht überprüft werden, ob die eingegebene Flugnummer überhaupt gültig ist und dementsprechend auch kein Flugstatus ausgegeben werden. Es wird als Fallback ein "leerer Flug" zurückgegeben, welcher dazu führt, dass dem User eine Error-Page angezeigt wird.
     - Dadurch dass Fallbacks genutzt werden, sobald Fehler auftreten, haben die Services gegebenenfalls Zeit sich zu erholen.
     - Mit Hilfe des Hystrix Dashboards kann das ganze beobachtet werden. Dazu muss einfach http://localhost:8080/hystrix/ aufgerufen werden und der Stream `http://localhost:8080/actuator/hystrix.stream` gemonitored werden.
     - Falls einer der Remote Services (DB & Data) zu lange braucht um zu antworten oder nicht erreichbar ist, erfolgt ein Timeout. Das ist implizit mit implementiert durch die Nutzung von `@HystrixCommand` und beträgt per Default 1000ms.
+- Retries: mit Spring Retry
+    - Beim Starten der Anwendung benötigen alle Services ihre Konfigurationen vom Config-Server. Falls dieser noch nicht bereit ist, schlagen Verbindungsversuche fehl. Wenn die Verbindung fehlschlägt, versuchen die Services sich innerhalb von festgelegten Intervallen erneut zu verbinden (max. 5mal). Das gibt dem Config-Server genug Zeit zu starten ohne, dass der Start der gesamten Anwendung fehlschlägt. Die Konfiguration für die Retries befindet sich bei allen Services in den `bootstrap.properties`.
 
 #### Cloud Infrastructure
 
