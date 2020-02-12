@@ -45,9 +45,10 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
 
 #### Resilience 
 
-- implementiert mit Failsafe
 - Retries: TODO
-- Circuit Breaker: TODO
+- Circuit Breaker & Fallback: implementiert mit Hystrix
+    - Falls die UI keine Informationen über den Flugstatus vom Data-Service bekommt, aber Verbindung zum DB-Service hergestellt werden kann, werden trotzdem die Fluginformationen angezeigt und statt des Flugstatus einfach "CURRENTLY NOT AVAILABLE" ausgegeben.
+    - Falls die UI keine Verbindung zum DB-Service herstellen kann, kann auch nicht überprüft werden, ob die eingegebene Flugnummer überhaupt gültig ist und dementsprechend auch kein Flugstatus ausgegeben werden. Es wird als Fallback ein "leerer Flug" zurückgegeben, welcher dazu führt, dass dem User eine Error-Page angezeigt wird.
 
 #### Cloud Infrastructure
 
