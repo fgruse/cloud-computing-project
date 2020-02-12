@@ -1,4 +1,4 @@
-version: '3'
+version: "3.7"
 services:
   config-server:
     image: config-server:latest
@@ -7,25 +7,32 @@ services:
       dockerfile: DockerFile
     hostname: config-server
     expose:
-      - 8888
+      - "8888"
     ports:
-      - 8888:8888
+      - "8888:8888"
     networks:
-      - samplenet
+      - local
+    restart: on-failure
 
   service-discovery:
-    container_name: service-discovery-container
+    container_name: service-discovery
     image: service-discovery:latest
     build:
       context: ./service-discovery
       dockerfile: DockerFile
     hostname: service-discovery
+    environment:
+      CONFIG_URI: http://config-server:8888
+      EUREKA_URI: http://service-discovery:8761/eureka
     expose:
-      - 8761
+      - "8761"
     ports:
-      - 8761:8761
+      - "8761:8761"
+    depends_on:
+      - config-server
     networks:
-      - samplenet
+      - local
+    restart: on-failure
 
   data-service:
     image: data-service:latest
@@ -33,6 +40,9 @@ services:
       context: ./data-service
       dockerfile: DockerFile
     hostname: data-service
+    environment:
+      CONFIG_URI: http://config-server:8888
+      EUREKA_URI: http://service-discovery:8761/eureka
     expose:
       - 8989
     ports:
@@ -41,8 +51,76 @@ services:
       - service-discovery
       - config-server
     networks:
-      - samplenet
+      - local
+    restart: on-failure
+
+#  db-service:
+#    image: db-service:latest
+#    build:
+#      context: ./db-service
+#      dockerfile: DockerFile
+#    hostname: db-service
+#    environment:
+#      CONFIG_URI: http://config-server:8888
+#      DB_URI: jdbc:mysql://mysql-db:3306/flights?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+#      EUREKA_URI: http://service-discovery:8761/eureka
+#    expose:
+#      - 8083
+#    ports:
+#      - 8083:8083
+#    depends_on:
+#      - service-discovery
+#      - config-server
+#      - mysql-db
+#    networks:
+#      - local
+#    restart: on-failure
+
+#  mysql-db:
+#    container_name: mysql-db
+#    image: mysql:8.0.18
+#    restart: always
+#    environment:
+#      MYSQL_DATABASE: 'flights'
+#      MYSQL_USER: 'root'
+#      MYSQL_PASSWORD: 'systeme'
+#      MYSQL_ROOT_PASSWORD: 'systeme'
+#    ports:
+#      - 3306:3306
+#    expose:
+#      - 3306
+#    volumes:
+#      - flights:/var/lib/mysql
+#    networks:
+#      - local
+
+#  ui-service:
+#    image: ui-service:latest
+#    build:
+#      context: ./ui-service
+#      dockerfile: DockerFile
+#    hostname: ui-service
+#    environment:
+#      CONFIG_URI: http://config-server:8888
+#      EUREKA_URI: http://service-discovery:8761/eureka
+#      DATA_SERVICE_URI: http://data-service:8989
+#      DB_SERVICE_URI: http://db-service:8083
+#    expose:
+#      - 8080
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      - service-discovery
+#      - config-server
+#      - db-service
+#      - data-service
+#    networks:
+#      - local
+#    restart: on-failure
 
 networks:
-  samplenet:
+  local:
     driver: bridge
+
+volumes:
+  flights:
