@@ -1,6 +1,7 @@
 version: "3.7"
 services:
   config-server:
+    container_name: config-server
     image: config-server:latest
     build:
       context: ./config-server
@@ -23,7 +24,7 @@ services:
     hostname: service-discovery
     environment:
       CONFIG_URI: http://config-server:8888
-      EUREKA_URI: http://service-discovery:8761/eureka
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-discovery:8761/eureka
     expose:
       - "8761"
     ports:
@@ -35,6 +36,7 @@ services:
     restart: on-failure
 
   data-service:
+    container_name: data-service
     image: data-service:latest
     build:
       context: ./data-service
@@ -42,7 +44,7 @@ services:
     hostname: data-service
     environment:
       CONFIG_URI: http://config-server:8888
-      EUREKA_URI: http://service-discovery:8761/eureka
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-discovery:8761/eureka
     expose:
       - 8989
     ports:
@@ -54,69 +56,69 @@ services:
       - local
     restart: on-failure
 
-#  db-service:
-#    image: db-service:latest
-#    build:
-#      context: ./db-service
-#      dockerfile: DockerFile
-#    hostname: db-service
-#    environment:
-#      CONFIG_URI: http://config-server:8888
-#      DB_URI: jdbc:mysql://mysql-db:3306/flights?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
-#      EUREKA_URI: http://service-discovery:8761/eureka
-#    expose:
-#      - 8083
-#    ports:
-#      - 8083:8083
-#    depends_on:
-#      - service-discovery
-#      - config-server
-#      - mysql-db
-#    networks:
-#      - local
-#    restart: on-failure
+  db-service:
+    image: db-service:latest
+    build:
+      context: ./db-service
+      dockerfile: DockerFile
+    hostname: db-service
+    environment:
+      CONFIG_URI: http://config-server:8888
+      DB_URI: jdbc:mysql://mysql-db:3306/flights?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-discovery:8761/eureka
+    expose:
+      - 8083
+    ports:
+      - 8083:8083
+    depends_on:
+      - service-discovery
+      - config-server
+      - mysql-db
+    networks:
+      - local
+    restart: on-failure
 
-#  mysql-db:
-#    container_name: mysql-db
-#    image: mysql:8.0.18
-#    restart: always
-#    environment:
-#      MYSQL_DATABASE: 'flights'
-#      MYSQL_USER: 'root'
-#      MYSQL_PASSWORD: 'systeme'
-#      MYSQL_ROOT_PASSWORD: 'systeme'
-#    ports:
-#      - 3306:3306
-#    expose:
-#      - 3306
-#    volumes:
-#      - flights:/var/lib/mysql
-#    networks:
-#      - local
+  mysql-db:
+    container_name: mysql-db
+    image: mysql:8.0.18
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'flights'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'systeme'
+      MYSQL_ROOT_PASSWORD: 'systeme'
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - flights:/var/lib/mysql
+    networks:
+      - local
 
-#  ui-service:
-#    image: ui-service:latest
-#    build:
-#      context: ./ui-service
-#      dockerfile: DockerFile
-#    hostname: ui-service
-#    environment:
-#      CONFIG_URI: http://config-server:8888
-#      EUREKA_URI: http://service-discovery:8761/eureka
-#      DATA_SERVICE_URI: http://data-service:8989
-#      DB_SERVICE_URI: http://db-service:8083
-#    expose:
-#      - 8080
-#    ports:
-#      - 8080:8080
-#    depends_on:
-#      - service-discovery
-#      - config-server
-#      - db-service
-#      - data-service
-#    networks:
-#      - local
-#    restart: on-failure
+  ui-service:
+    image: ui-service:latest
+    build:
+      context: ./ui-service
+      dockerfile: DockerFile
+    hostname: ui-service
+    environment:
+      CONFIG_URI: http://config-server:8888
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-discovery:8761/eureka
+      DATA_SERVICE_URI: http://data-service:8989
+      DB_SERVICE_URI: http://db-service:8083
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    depends_on:
+      - service-discovery
+      - config-server
+      - db-service
+      - data-service
+    networks:
+      - local
+    restart: on-failure
 
 networks:
   local:
