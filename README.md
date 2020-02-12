@@ -11,7 +11,7 @@ Die Anwendung sollte außerdem als eine Cloud-Anwendung konzipiert sein (IaaS od
 
 ## 2. Unsere Anwendung
 ### 2.1 Beschreibung
-Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehenden Flügen abrufen. Dazu muss er einfach die Flugnummer seines Fluges eingeben und erhält sofort Informationen über Datum, die operierende Fluggesellschaft, Abflugort, Ankunftsort und die Abflugszeit. Des weiteren wird natürlich der Flugstatus angezeigt: 'Cancelled', 'On Time', 'Delayed' oder falls die Information gerade einmal nicht verfügbar sein sollte 'Currently Not Available" ist. 
+Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehenden Flügen abrufen. Dazu muss er einfach die Flugnummer seines Fluges eingeben und erhält sofort Informationen über Datum, die operierende Fluggesellschaft, Abflugort, Ankunftsort und die Abflugszeit. Des weiteren wird natürlich der Flugstatus angezeigt: "Cancelled", "On Time", "Delayed" oder "Currently Not Available" falls die Information gerade einmal nicht verfügbar sein sollte. 
 
 ### 2.2 Aufbau
 
@@ -40,7 +40,7 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
     - Port 8761
 - Configuration Server: speichert zentralisiert die Config-Dateien für alle Services 
     - Dateien befinden sich im Verzeichnis `config-server/configs`
-    - in den `bootstrap.properties` jedes Services wird der Port festgelegt
+    - in den `bootstrap.properties` jedes Services wird die Spring Cloud Config URI angegeben
     - Port 8888
 
 #### Resilience 
@@ -52,9 +52,9 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
     - Falls die UI keine Verbindung zum DB-Service herstellen kann, kann auch nicht überprüft werden, ob die eingegebene Flugnummer überhaupt gültig ist und dementsprechend auch kein Flugstatus ausgegeben werden. Es wird als Fallback ein "leerer Flug" zurückgegeben, welcher dazu führt, dass dem User eine Error-Page angezeigt wird.
     - Dadurch dass Fallbacks genutzt werden, sobald Fehler auftreten, haben die Services gegebenenfalls Zeit sich zu erholen.
     - Mit Hilfe des Hystrix Dashboards kann das ganze beobachtet werden. Dazu muss einfach http://localhost:8080/hystrix/ aufgerufen werden und der Stream `http://localhost:8080/actuator/hystrix.stream` gemonitored werden.
-    - Falls einer der Remote Services (DB & Data) zu lange braucht um zu antworten oder nicht erreichbar ist, erfolgt ein Timeout. Das ist implizit mit implementiert durch die Nutzung von `@HystrixCommand` und beträgt per Default 1000ms.
+    - Falls einer der Remote Services (DB & Data) zu lange braucht um zu antworten oder nicht erreichbar ist, erfolgt ein Timeout. Das ist implizit mit implementiert durch die Nutzung von `@HystrixCommand` und beträgt standardmäßig 1000ms.
 - Retries: mit Spring Retry
-    - Beim Starten der Anwendung benötigen alle Services ihre Konfigurationen vom Config-Server. Falls dieser noch nicht bereit ist, schlagen Verbindungsversuche fehl. Wenn die Verbindung fehlschlägt, versuchen die Services sich innerhalb von festgelegten Intervallen erneut zu verbinden (max. 5mal). Das gibt dem Config-Server genug Zeit zu starten ohne, dass der Start der gesamten Anwendung fehlschlägt. Die Konfiguration für die Retries befindet sich bei allen Services in den `bootstrap.properties`.
+    - Beim Starten der Anwendung benötigen alle Services ihre Konfigurationen vom Config-Server. Falls dieser noch nicht bereit ist, schlagen Verbindungsversuche fehl. Wenn die Verbindung fehlschlägt, versuchen die Services sich innerhalb von festgelegten Intervallen erneut zu verbinden (max. 5mal). Das gibt dem Config-Server genug Zeit zu starten, ohne dass der Start der gesamten Anwendung fehlschlägt. Die Konfiguration für die Retries befindet sich bei allen Services in den `bootstrap.properties`.
 
 #### Cloud Infrastructure
 
