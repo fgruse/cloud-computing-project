@@ -64,18 +64,39 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
 
 ### 2.3 Getting Started
 
-1. Datenbank
+#### Lokal - manuell ausgeführt 
+
+1. Voraussetzungen
 
 Um die Anwendung starten zu können, muss `mysql` lokal installiert sein. Das Passwort des MySQL-root-Users ist derzeit als `systeme` festgelegt und muss entweder so gesetzt werden oder in der Datei `config-server/configs/db-service.properties` geändert werden, damit Datenbankzugriff erfolgen kann. 
 Das erstellen der Datenbank sowie das füllen mit Daten passiert dann automatisch.
 
 2. Starten der Anwendung
 
-TODO
+Beginnend mit `config-server` in jeweils einem neuen Terminal jeden Service einzeln starten mit dem Befehl `./gradlew bootRun`
 
 3. Nutzen der Anwendung
 
-Zunächst muss die Anwendung im Browser unter https://localhost:8080/flug aufgerufen werden. Es sollte die UI erscheinen, die den User auffordert, eine Flugnummer einzugeben.
+Die Anwendung kann jetzt im Browser unter https://localhost:8080/flug aufgerufen werden. Es sollte die UI erscheinen, die den User auffordert, eine Flugnummer einzugeben.
+
+Flugnummern, für die Fluginformationen vorhanden sind:
+
+AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T69KL5, X87UL1, OS57LM, EJU5907, LX981, BA8494
+
+#### Lokal - mit Skript ausgeführt
+
+1. Voraussetzungen
+
+Um die Anwendung starten zu können muss Docker bzw. Docker Compose installiert und gestartet sein.
+
+2. Starten der Anwendung
+
+Alle zum Starten der Anwendung notwendigen Schritte befinden sich im Skript `run.sh` (Builds, Docker Images, Docker Compose). Dieses muss einfach nur im Terminal mit dem Befehl `./run.sh` ausgeführt werden. 
+Falls das nicht funktionieren sollte, fehlen vermutlich die Rechte zum ausführen des Skripts. Einfach `chmod u+x run.bat` ausführen und das Skript danach noch einmal laufen lassen.
+
+3. Nutzen der Anwendung
+
+Die Anwendung kann jetzt im Browser unter https://localhost:8080/flug aufgerufen werden. Es sollte die UI erscheinen, die den User auffordert, eine Flugnummer einzugeben.
 
 Flugnummern, für die Fluginformationen vorhanden sind:
 
