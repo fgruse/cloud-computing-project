@@ -1,7 +1,6 @@
 package com.github.cosmoem.uiservice.handlingformsubmission;
 
 import java.time.LocalTime;
-import java.util.Date;
 
 public class Flug {
 
@@ -25,8 +24,11 @@ public class Flug {
         this.uhrzeit = uhrzeit;
     }
 
-    public Flug() {
+    public Flug(final String flugnummer) {
+        this.flugnummer = flugnummer;
+    }
 
+    public Flug() {
     }
 
     public int getId() {
