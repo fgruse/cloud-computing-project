@@ -6,7 +6,7 @@ import java.time.*;
 
 
 @Entity(name = "flugstatus")
-public class Flugstatus {
+public class Fluginfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class Flugstatus {
     @Column(name = "uhrzeit")
     private LocalTime uhrzeit;
 
-    public Flugstatus(final String flugnummer, final String airline, final String von, final String nach, final String flugdatum, final LocalTime uhrzeit) {
+    public Fluginfo(final String flugnummer, final String airline, final String von, final String nach, final String flugdatum, final LocalTime uhrzeit) {
         this.flugnummer = flugnummer;
         this.airline = airline;
         this.von = von;
@@ -39,7 +39,7 @@ public class Flugstatus {
         this.uhrzeit = uhrzeit;
     }
 
-    public Flugstatus() {
+    public Fluginfo() {
     }
 
     public int getId() {

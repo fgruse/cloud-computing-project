@@ -3,7 +3,7 @@ package com.github.cosmoem.dbservice.web.model;
 import java.time.LocalTime;
 import java.util.Date;
 
-public class FlugstatusModel {
+public class FluginfoModel {
 
     private int id;
     private String flugnummer;
@@ -13,10 +13,10 @@ public class FlugstatusModel {
     private String flugdatum;
     private LocalTime uhrzeit;
 
-    public FlugstatusModel() {
+    public FluginfoModel() {
     }
 
-    public FlugstatusModel(final int id, final String flugnummer, final String airline, final String von, final String nach, final String flugdatum,
+    public FluginfoModel(final int id, final String flugnummer, final String airline, final String von, final String nach, final String flugdatum,
             final LocalTime uhrzeit) {
         this.id = id;
         this.flugnummer = flugnummer;
