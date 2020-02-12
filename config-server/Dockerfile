@@ -2,7 +2,7 @@ FROM hirokimatsumoto/alpine-openjdk-11
 
 VOLUME /tmp
 
-EXPOSE 8080
+EXPOSE 8888
 
 COPY build/libs/*.jar config-server.jar
 
