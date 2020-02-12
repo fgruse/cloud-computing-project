@@ -62,28 +62,9 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
 - Skalierbarkeit: TODO
 
 
-### 2.3 Getting Started
+### 2.3 Starten der Anwendung
 
-#### Lokal - manuell ausgeführt 
-
-1. Voraussetzungen
-
-Um die Anwendung starten zu können, muss `mysql` lokal installiert sein. Das Passwort des MySQL-root-Users ist derzeit als `systeme` festgelegt und muss entweder so gesetzt werden oder in der Datei `config-server/configs/db-service.properties` geändert werden, damit Datenbankzugriff erfolgen kann. 
-Das erstellen der Datenbank sowie das füllen mit Daten passiert dann automatisch.
-
-2. Starten der Anwendung
-
-Beginnend mit `config-server` in jeweils einem neuen Terminal jeden Service einzeln starten mit dem Befehl `./gradlew bootRun`
-
-3. Nutzen der Anwendung
-
-Die Anwendung kann jetzt im Browser unter https://localhost:8080/flug aufgerufen werden. Es sollte die UI erscheinen, die den User auffordert, eine Flugnummer einzugeben.
-
-Flugnummern, für die Fluginformationen vorhanden sind:
-
-AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T69KL5, X87UL1, OS57LM, EJU5907, LX981, BA8494
-
-#### Lokal - mit Skript ausgeführt
+#### Starten mit Hilfe eines Skripts (empfohlen)
 
 1. Voraussetzungen
 
@@ -94,10 +75,25 @@ Um die Anwendung starten zu können muss Docker bzw. Docker Compose installiert 
 Alle zum Starten der Anwendung notwendigen Schritte befinden sich im Skript `run.sh` (Builds, Docker Images, Docker Compose). Dieses muss einfach nur im Terminal mit dem Befehl `./run.sh` ausgeführt werden. 
 Falls das nicht funktionieren sollte, fehlen vermutlich die Rechte zum ausführen des Skripts. Einfach `chmod u+x run.bat` ausführen und das Skript danach noch einmal laufen lassen.
 
-3. Nutzen der Anwendung
+#### Starten durch manuelles Ausführen
+
+1. Voraussetzungen
+
+Um die Anwendung starten zu können, muss `mysql` lokal installiert sein. Das Passwort des MySQL-root-Users ist derzeit als `systeme` festgelegt und muss entweder so gesetzt werden oder in der Datei `config-server/configs/db-service.properties` geändert werden, damit Datenbankzugriff erfolgen kann. 
+Das erstellen der Datenbank sowie das füllen mit Daten passiert dann automatisch.
+
+2. Starten der Anwendung
+
+Beginnend mit `config-server` in jeweils einem neuen Terminal jeden Service einzeln starten mit dem Befehl `./gradlew bootRun`
+
+### 2.4 Nutzen der Anwengun
 
 Die Anwendung kann jetzt im Browser unter https://localhost:8080/flug aufgerufen werden. Es sollte die UI erscheinen, die den User auffordert, eine Flugnummer einzugeben.
 
 Flugnummern, für die Fluginformationen vorhanden sind:
 
 AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T69KL5, X87UL1, OS57LM, EJU5907, LX981, BA8494
+
+### 2.5 Deployment
+
+TODO
