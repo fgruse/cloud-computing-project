@@ -1,0 +1,48 @@
+version: '3'
+services:
+  config-server:
+    image: config-server:latest
+    build:
+      context: ./config-server
+      dockerfile: DockerFile
+    hostname: config-server
+    expose:
+      - 8888
+    ports:
+      - 8888:8888
+    networks:
+      - samplenet
+
+  service-discovery:
+    container_name: service-discovery-container
+    image: service-discovery:latest
+    build:
+      context: ./service-discovery
+      dockerfile: DockerFile
+    hostname: service-discovery
+    expose:
+      - 8761
+    ports:
+      - 8761:8761
+    networks:
+      - samplenet
+
+  data-service:
+    image: data-service:latest
+    build:
+      context: ./data-service
+      dockerfile: DockerFile
+    hostname: data-service
+    expose:
+      - 8989
+    ports:
+      - 8989:8989
+    depends_on:
+      - service-discovery
+      - config-server
+    networks:
+      - samplenet
+
+networks:
+  samplenet:
+    driver: bridge
