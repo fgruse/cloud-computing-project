@@ -2,7 +2,7 @@
 
 von [Laura Zaworski](https://github.com/LauraZaworski), [Sophie Schröder](https://github.com/sophieschrder), [Anna-Frieda Gruse](https://github.com/cosmoem)
 
-Dieses Projekt ist im Rahmen der Lehrveranstaltung Verteilte System an der HTW Berlin im WS 19/20 entstanden.
+Dieses Projekt ist im Rahmen der Lehrveranstaltung "Verteilte System" an der HTW Berlin im WS 19/20 entstanden.
 
 ## 1. Aufgabenstellung
 Das Ziel war es, eine "sinnvolle" Anwendung zu entwickeln, die aus mindestens drei Microservices besteht, welche miteinander kommunizieren (REST). 
