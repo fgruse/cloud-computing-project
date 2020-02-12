@@ -105,8 +105,8 @@ services:
     environment:
       CONFIG_URI: http://config-server:8888
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-discovery:8761/eureka
-      DATA_SERVICE_URI: http://data-service:8989
-      DB_SERVICE_URI: http://db-service:8083
+      DATA_SERVICE_URI: http://data-service:8989/
+      DB_SERVICE_URI: http://db-service:8083/
     expose:
       - 8080
     ports:
@@ -114,8 +114,8 @@ services:
     depends_on:
       - service-discovery
       - config-server
-      - db-service
       - data-service
+      - db-service
     networks:
       - local
     restart: on-failure
