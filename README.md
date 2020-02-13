@@ -63,7 +63,14 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
 
 #### Cloud Infrastructure
 
-- Deployable mit CloudFoundry Dev: TODO
+- Cloud Foundry: 
+    - Für jeden Service gibt es eine `manifest.yml`, in der sich die Deployment-Konfigurationen für Cloud Foundry befinden. Die aktuelle Konfiguration setzt voraus, dass Cloud Foundry Dev verwendet wird (User `admin`, Org `cfdev-org`, Space `cfdev-space`). Die Konfigurationen können fast genau so wie sie sind auch für richtige Deployments auf Cloud Foundry genutzt werden, jedoch müssen die Umgebungsvariablen für alle URIs angepasst werden um dann die richtigen Routes zu repräsentieren.
+    - Deploymentprozess:
+        - Build jedes Services mit `./gradlew clean build -x`
+        - Deployment jedes Services mit `cf push <service-name>` (ausführen im jeweiligen Verzeichnis).
+        - Wichtig: Der Config-Server muss als erstes deployed werden, da die anderen Services auf ihn angewiesen sind.
+        - Alle Services werden auf Port 8080 deployed. Dafür gibt es extra eine Config mit dem Profil `cloud`. 
+        - Datenbank: TODO
 - Skalierbarkeit: TODO
 
 
