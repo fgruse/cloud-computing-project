@@ -108,6 +108,7 @@ AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T6
     - Datenbank
         - Mit dem Befehl `cf create-service p-mysql 20mb mysql` kann für Cloud Foundry Dev ein Datenbankservice mit dem Namen `mysql` erstellt werden. Dieser ist so auch in der `manifest.yml` des db-service erwähnt. Der Plan (`20mb`) und der Service (`p-mysql`) können für Cloud Foundry eventuell abweichen.
         - Nach dem Deployment der App db-service muss der erstellte Service an die App gebunden werden mit `cf bind-service db-service mysql`.
+        - Verifizieren des Bindings mit `cf service mysql`. db-service sollte jetzt gelistet sein unter bound apps.
     - Deployments
         - Build jedes Services mit `./gradlew clean build -x`
         - Deployment jedes Services mit `cf push <app-name>` (ausführen im jeweiligen Verzeichnis).
