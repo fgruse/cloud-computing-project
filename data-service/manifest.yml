@@ -1,0 +1,11 @@
+applications:
+  - name: data-service
+    buildpacks:
+      - java_buildpack
+    path: build/libs/data-service-0.0.1-SNAPSHOT.jar
+    memory: 1G
+    instances: 2
+    hostname: data-service
+    env:
+      CONFIG_URI: http://config-server.dev.cfdev.sh
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-discovery.dev.cfdev.sh/eureka

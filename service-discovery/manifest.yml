@@ -4,3 +4,9 @@ applications:
     buildpacks:
       - java_buildpack
     path: build/libs/service-discovery-0.0.1-SNAPSHOT.jar
+    memory: 1G
+    instances: 2
+    hostname: service-discovery
+    env:
+      CONFIG_URI: http://config-server.dev.cfdev.sh
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-discovery.dev.cfdev.sh/eureka

@@ -1,0 +1,15 @@
+---
+applications:
+  - name: ui-service
+    buildpacks:
+      - java_buildpack
+    path: build/libs/ui-service-0.0.1-SNAPSHOT.jar
+    memory: 1G
+    instances: 2
+    hostname: ui-service
+    env:
+      CONFIG_URI: http://config-server.dev.cfdev.sh
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-discovery.dev.cfdev.sh/eureka
+      # wichtig: die URI muss mit einem / enden
+      DATA_SERVICE_URI: http://data-service.dev.cfdev.sh/
+      DB_SERVICE_URI: http://db-service.dev.cfdev.sh/
