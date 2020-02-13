@@ -63,16 +63,11 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
 
 #### Cloud Infrastructure
 
-- Cloud Foundry: 
-    - Für jeden Service gibt es eine `manifest.yml`, in der sich die Deployment-Konfigurationen für Cloud Foundry befinden. Die aktuelle Konfiguration setzt voraus, dass Cloud Foundry Dev verwendet wird (User `admin`, Org `cfdev-org`, Space `cfdev-space`). Die Konfigurationen können fast genau so wie sie sind auch für richtige Deployments auf Cloud Foundry genutzt werden, jedoch müssen die Umgebungsvariablen für alle URIs angepasst werden um dann die richtigen Routes zu repräsentieren.
-    - Deploymentprozess:
-        - Build jedes Services mit `./gradlew clean build -x`
-        - Deployment jedes Services mit `cf push <service-name>` (ausführen im jeweiligen Verzeichnis).
-        - Wichtig: Der Config-Server muss als erstes deployed werden, da die anderen Services auf ihn angewiesen sind.
-        - Alle Services werden auf Port 8080 deployed. Dafür gibt es extra eine Config mit dem Profil `cloud`. 
-        - Datenbank: TODO
-- Skalierbarkeit: TODO
-
+- Deployments: mit Cloud Foundry (Dev)
+    - Cloud Foundry ist ein Platform as a Service Provider und übernimmt für uns das Bereitstellen der Hardware, Virtualisierung, Betriebssystem, Container und Middleware. Wenn wir unsere Anwendung mit Cloud Foundry deployen, müssen wir uns also nicht mehr selbst mit Docker Compose rumschlagen.  
+    - Für jeden Service ist das Deployment bereits konfiguriert (`manifest.yml`).
+    - Für die MySQL-Datenbank kann ganz einfach an Service mit Cloud Foundry erstellt werden.
+    - Alle Services sind schnell und einfach skalierbar.
 
 ### 2.3 Starten der Anwendung
 
@@ -108,4 +103,16 @@ AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T6
 
 ### 2.5 Deployment
 
-TODO
+- Cloud Foundry
+    - Für jeden Service gibt es eine `manifest.yml`, in der sich die Deployment-Konfigurationen für Cloud Foundry befinden. Die aktuelle Konfiguration setzt voraus, dass Cloud Foundry Dev verwendet wird (User `admin`, Org `cfdev-org`, Space `cfdev-space`). Die Konfigurationen können fast genau so wie sie sind auch für richtige Deployments auf Cloud Foundry genutzt werden, jedoch müssen die Umgebungsvariablen für alle URIs angepasst werden um dann die richtigen Routes zu repräsentieren.
+    - Datenbank
+        - Mit dem Befehl `cf create-service p-mysql 20mb mysql` kann für Cloud Foundry Dev ein Datenbankservice mit dem Namen `mysql` erstellt werden. Dieser ist so auch in der `manifest.yml` des db-service erwähnt. Der Plan (`20mb`) und der Service (`p-mysql`) können für Cloud Foundry eventuell abweichen.
+        - Nach dem Deployment der App db-service muss der erstellte Service an die App gebunden werden mit `cf bind-service db-service mysql`.
+    - Deployments
+        - Build jedes Services mit `./gradlew clean build -x`
+        - Deployment jedes Services mit `cf push <app-name>` (ausführen im jeweiligen Verzeichnis).
+        - Wichtig: Der Config-Server muss als erstes deployed werden, da die anderen Services auf ihn angewiesen sind.
+        - Wichtig: Die Datenbank muss erstellt sein bevor der db-service deployed werden kann.
+        - Alle Services werden auf Port 8080 deployed. Dafür gibt es extra eine Config mit dem Profil `cloud`. 
+- Skalierbarkeit: mit Cloud Foundry
+    - Sowohl bei Cloud Foundry Dev als auch Cloud Foundry funktioniert das Skalieren ganz einfach. Mit dem Befehl `cf scale <app-name>` können mit `-i` Instanzen, mit `-k` Disk und mit `-m` Memory skaliert werden während die App läuft.
