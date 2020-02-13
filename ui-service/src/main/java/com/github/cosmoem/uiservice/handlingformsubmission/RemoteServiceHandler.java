@@ -1,6 +1,7 @@
 package com.github.cosmoem.uiservice.handlingformsubmission;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import java.time.LocalTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class RemoteServiceHandler {
         restTemplate = new RestTemplate();
     }
 
-    @HystrixCommand(fallbackMethod = "returnDefaultFlight")
+    @HystrixCommand(fallbackMethod = "returnDefaultFlight", commandKey = "Fluginfo")
     public Flug getFluginfo(String flugnummer) {
         String requestUrl = urlFluginfo + "api/flug/" + flugnummer;
         Flug result = restTemplate.getForObject(requestUrl, Flug.class);
@@ -33,7 +34,7 @@ public class RemoteServiceHandler {
         return new Flug();
     }
 
-    @HystrixCommand(fallbackMethod = "returnDefaultString")
+    @HystrixCommand(fallbackMethod = "returnDefaultString", commandKey = "Flugstatus")
     public String getFlugstatus(String flugnummer) {
         String requestUrl = urlFlugstatus + "api/status/" + flugnummer;
         return restTemplate.getForObject(requestUrl, String.class);
