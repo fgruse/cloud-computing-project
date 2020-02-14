@@ -113,7 +113,7 @@ AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T6
         - Der erstellte Datenbank-Service wird automatisch bei Deployment des db-service an ihn gebunden, da das in der `manifest.yml` so definiert ist.
         - Verifizieren des Bindings mit `cf service mysql`. db-service sollte jetzt gelistet sein unter bound apps.
     - Deployments
-        - Build jedes Services mit `./gradlew clean build -x`
+        - Build jedes Services durch Ausführen von `./gradlew clean build -x` im jeweiligen Verzeichnis oder Ausführen des Skripts `./build.sh` im root. Falls das Skript nicht läuft, muss eventuell erst `chmod u+x build.sh` ausgeführt werden.
         - Deployment jedes Services mit `cf push <app-name>` (ausführen im jeweiligen Verzeichnis).
         - Wichtig: Der Config-Server muss als erstes deployed werden, da die anderen Services auf ihn angewiesen sind.
         - Wichtig: Die Datenbank muss erstellt sein, bevor der db-service deployed werden kann.
