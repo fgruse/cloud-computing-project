@@ -53,14 +53,14 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
     - Falls einer der Remote Services (DB & Data) zu lange braucht um zu antworten oder nicht erreichbar ist, erfolgt ein Timeout. Das ist implizit mit implementiert durch die Nutzung von `@HystrixCommand` und beträgt standardmäßig 1000ms.
     - Nach schon einem Request und nur 1% Fehlschlägen wird die Sicherung geöffnet und bleibt für 10sek offen.
     - Dadurch dass keine Requests mehr durchgelassen werden (Circuit Open), sobald Fehler auftreten, haben die Services gegebenenfalls Zeit sich zu erholen. Es werden aber Fallbacks genutzt, damit der Service zumindest weiterhin halbwegs nutzbar und informativ bleibt.
-    - Die derzeitige Konfiguration vom Circuit Breaker ist nicht unbedingt Production-geeignet, macht es aber möglich, das Verhalten zu beobachten. Mit Hilfe des Hystrix Dashboards geht das ganz leicht. Dazu muss einfach http://localhost:8080/hystrix/ http:// aufgerufen werden und der Stream `http://localhost:8080/actuator/hystrix.stream` (manuell gestartet mit Gradle) bzw. `http://config-server:8080/actuator/hystrix.stream` (gestartet mit Skript/ Docker Compose) gemonitored werden. Wenn man nun Requests sendet und z.B. der Data-Service oder der DB-Service offline ist, schlagen diese fehl, der Circuit ist dann geöffnet und weitere Requests innerhalb der nächsten 10sek werden nicht mehr ausgeführt.
+    - Die derzeitige Konfiguration vom Circuit Breaker ist nicht unbedingt Production-geeignet, macht es aber möglich, das Verhalten zu beobachten. Mit Hilfe des Hystrix Dashboards geht das ganz leicht. Dazu muss einfach http://localhost:8080/hystrix/ http:// aufgerufen werden und der Stream `http://localhost:8080/actuator/hystrix.stream` (manuell gestartet mit Gradle) bzw. `http://config-server:8080/actuator/hystrix.stream` (gestartet mit Skript/ Docker Compose) gemonitored werden (bei Deployment natürlich die entsprechenden URIs verwenden). Wenn man nun Requests sendet und z.B. der Data-Service oder der DB-Service offline ist, schlagen diese fehl, der Circuit ist dann geöffnet und weitere Requests innerhalb der nächsten 10sek werden nicht mehr ausgeführt.
     - Die Hystrix-Command-Config befindet sich in `config-server/configs/ui-service.properties` und kann separat für Fluginfo (DB-Service) und Flugstatus (Data-Service) angepasst werden.
     
     ![Hystrix Dashboard Circuit Open](Hystrix-Dashboard-Circuit-Open.png)
     
 - Retries: mit Spring Retry
     - Beim Starten der Anwendung benötigen alle Services ihre Konfigurationen vom Config-Server. Falls dieser noch nicht bereit ist, schlagen Verbindungsversuche fehl. Wenn die Verbindung fehlschlägt, versuchen die Services sich innerhalb von festgelegten Intervallen erneut zu verbinden (max. 5mal). Das gibt dem Config-Server genug Zeit zu starten, ohne dass der Start der gesamten Anwendung fehlschlägt. Die Konfiguration für die Retries befindet sich bei allen Services in den `bootstrap.properties`.
-- Load Balancing: mit Cloud Foundry 
+- Load Balancing: mit Cloud Foundry (nur bei Deployment)
     - Sobald mehrere Instanzen für eine App deployed sind, findet automatisches Load Balancing statt. Der Load-Balancing-Algorithmus kann auch spezifisch angegeben werden, default ist `round-robin`. 
 
 #### Cloud Infrastructure
@@ -74,7 +74,7 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
     
 ### 2.3 Starten der Anwendung
 
-#### Starten mit Hilfe eines Skripts (empfohlen)
+#### Lokales Starten mit Hilfe eines Skripts (empfohlen)
 
 1. Voraussetzungen
 
@@ -85,7 +85,7 @@ Um die Anwendung starten zu können muss Docker bzw. Docker Compose installiert 
 Alle zum Starten der Anwendung notwendigen Schritte befinden sich im Skript `run.sh` (Builds, Docker Images, Docker Compose). Dieses muss einfach nur im Terminal mit dem Befehl `./run.sh` ausgeführt werden. 
 Falls das nicht funktionieren sollte, fehlen vermutlich die Rechte zum ausführen des Skripts. Einfach `chmod u+x run.bat` ausführen und das Skript danach noch einmal laufen lassen.
 
-#### Starten durch manuelles Ausführen
+#### Lokales Starten durch manuelles Ausführen
 
 1. Voraussetzungen
 
@@ -95,6 +95,20 @@ Das erstellen der Datenbank sowie das füllen mit Daten passiert dann automatisc
 2. Starten der Anwendung
 
 Beginnend mit `config-server` in jeweils einem neuen Terminal jeden Service einzeln starten mit dem Befehl `./gradlew bootRun`
+
+#### Starten durch Deployment
+
+1. Voraussetzungen
+
+Entweder ein Cloud Foundry Account (die kostenlose Version reicht nicht aus, um die gesamte Anwendung zu deployen) oder alternativ Cloud Foundry Dev. Eine Anleitung dazu gibt es [hier](https://pivotal.io/platform/pcf-tutorials/getting-started-with-pivotal-cloud-foundry-dev/introduction).
+
+2. Deployment auf Cloud Foundry bzw. Cloud Foundry Dev (lokal)
+
+Siehe [2.5 Deployment](#25-deployment)
+
+3. Starten der Anwendung
+
+Alle Apps sind nach dem Deployment automatisch gestartet. Sie können mit `cf stop <app-name>` gestoppt werden und dann mit `cf start <app-name>` wieder gestartet werden.
 
 ### 2.4 Nutzen der Anwengun
 
