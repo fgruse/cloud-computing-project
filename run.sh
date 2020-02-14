@@ -1,6 +1,3 @@
-# chmod u+x run.bat
-# ./run.bat
-
 cd config-server
 ./gradlew clean build -x test
 docker build -t config-server .
