@@ -60,6 +60,8 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
     
 - Retries: mit Spring Retry
     - Beim Starten der Anwendung benötigen alle Services ihre Konfigurationen vom Config-Server. Falls dieser noch nicht bereit ist, schlagen Verbindungsversuche fehl. Wenn die Verbindung fehlschlägt, versuchen die Services sich innerhalb von festgelegten Intervallen erneut zu verbinden (max. 5mal). Das gibt dem Config-Server genug Zeit zu starten, ohne dass der Start der gesamten Anwendung fehlschlägt. Die Konfiguration für die Retries befindet sich bei allen Services in den `bootstrap.properties`.
+- Load Balancing: mit Cloud Foundry 
+    - Sobald mehrere Instanzen für eine App deployed sind, findet automatisches Load Balancing statt. Der Load-Balancing-Algorithmus kann auch spezifisch angegeben werden, default ist `round-robin`. 
 
 #### Cloud Infrastructure
 
@@ -67,8 +69,9 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
     - Cloud Foundry ist ein Platform as a Service Provider und übernimmt für uns das Bereitstellen der Hardware, Virtualisierung, Betriebssystem, Container und Middleware. Wenn wir unsere Anwendung mit Cloud Foundry deployen, müssen wir uns also nicht mehr selbst mit Docker Compose rumschlagen.  
     - Für jeden Service ist das Deployment bereits konfiguriert (`manifest.yml`).
     - Für die MySQL-Datenbank kann ganz einfach an Service mit Cloud Foundry erstellt werden.
-    - Alle Services sind schnell und einfach skalierbar.
-
+- Skalierbarkeit:
+    - Alle Apps sind schnell und einfach skalierbar, sowohl vertikal (Memory & Disk) als auch horizontal (Instances) und das während die Apps laufen.
+    
 ### 2.3 Starten der Anwendung
 
 #### Starten mit Hilfe eines Skripts (empfohlen)
@@ -116,4 +119,8 @@ AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T6
         - Wichtig: Die Datenbank muss erstellt sein bevor der db-service deployed werden kann.
         - Alle Services werden auf Port 8080 deployed. Dafür gibt es extra eine Config mit dem Profil `cloud`. 
 - Skalierbarkeit: mit Cloud Foundry
-    - Sowohl bei Cloud Foundry Dev als auch Cloud Foundry funktioniert das Skalieren ganz einfach. Mit dem Befehl `cf scale <app-name>` können mit `-i` Instanzen, mit `-k` Disk und mit `-m` Memory skaliert werden während die App läuft.
+    - Sowohl bei Cloud Foundry Dev als auch Cloud Foundry funktioniert das Skalieren ganz einfach. Mit dem Befehl `cf scale <app-name>` können mit `-i` Instanzen, mit `-k` Disk und mit `-m` Memory skaliert werden und das sogar während die Apps laufen.
+    - In der `manifest.yml` jeder App sind erstmal 2 Instanzen konfiguriert sowie 1GB Memory.
+    - Mit `cf apps` bekommt man einen Überblick über den derzeitigen Stand aller Apps. 
+    
+    ![Cloud-Foundry-Skalierung](cloud-foundry-skalierung.png)
