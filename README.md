@@ -110,13 +110,13 @@ AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T6
     - Für jeden Service gibt es eine `manifest.yml`, in der sich die Deployment-Konfigurationen für Cloud Foundry befinden. Die aktuelle Konfiguration setzt voraus, dass Cloud Foundry Dev verwendet wird (User `admin`, Org `cfdev-org`, Space `cfdev-space`). Die Konfigurationen können fast genau so wie sie sind auch für richtige Deployments auf Cloud Foundry genutzt werden, jedoch müssen die Umgebungsvariablen für alle URIs angepasst werden um dann die richtigen Routes zu repräsentieren.
     - Datenbank
         - Mit dem Ausführen des Befehls `cf dev deploy-service mysql` und im Anschluss `cf create-service p-mysql 20mb mysql` kann für Cloud Foundry Dev ein Datenbankservice mit dem Namen `mysql` erstellt werden. Dieser ist so auch in der `manifest.yml` des db-service erwähnt. Für Cloud Foundry würde der erste Befehl wegfallen und der Plan (`20mb`) und der Service (`p-mysql`) können eventuell abweichen.
-        - Nach dem Deployment der App db-service muss der erstellte Service an die App gebunden werden mit `cf bind-service db-service mysql`.
+        - Der erstellte Datenbank-Service wird automatisch bei Deployment des db-service an ihn gebunden, da das in der `manifest.yml` so definiert ist.
         - Verifizieren des Bindings mit `cf service mysql`. db-service sollte jetzt gelistet sein unter bound apps.
     - Deployments
         - Build jedes Services mit `./gradlew clean build -x`
         - Deployment jedes Services mit `cf push <app-name>` (ausführen im jeweiligen Verzeichnis).
         - Wichtig: Der Config-Server muss als erstes deployed werden, da die anderen Services auf ihn angewiesen sind.
-        - Wichtig: Die Datenbank muss erstellt sein bevor der db-service deployed werden kann.
+        - Wichtig: Die Datenbank muss erstellt sein, bevor der db-service deployed werden kann.
         - Alle Services werden auf Port 8080 deployed. Dafür gibt es extra eine Config mit dem Profil `cloud`. 
 - Skalierbarkeit: mit Cloud Foundry
     - Sowohl bei Cloud Foundry Dev als auch Cloud Foundry funktioniert das Skalieren ganz einfach. Mit dem Befehl `cf scale <app-name>` können mit `-i` Instanzen, mit `-k` Disk und mit `-m` Memory skaliert werden und das sogar während die Apps laufen.
