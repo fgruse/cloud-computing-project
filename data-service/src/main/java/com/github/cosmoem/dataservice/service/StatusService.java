@@ -11,7 +11,6 @@ public class StatusService {
     public status getStatus() {
         Random r = new Random();
         int num = r.nextInt(3);
-        System.out.println(num);
         if(num == 0) {
             return status.ON_TIME;
         }
