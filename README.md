@@ -106,7 +106,7 @@ AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T6
 - Cloud Foundry
     - Für jeden Service gibt es eine `manifest.yml`, in der sich die Deployment-Konfigurationen für Cloud Foundry befinden. Die aktuelle Konfiguration setzt voraus, dass Cloud Foundry Dev verwendet wird (User `admin`, Org `cfdev-org`, Space `cfdev-space`). Die Konfigurationen können fast genau so wie sie sind auch für richtige Deployments auf Cloud Foundry genutzt werden, jedoch müssen die Umgebungsvariablen für alle URIs angepasst werden um dann die richtigen Routes zu repräsentieren.
     - Datenbank
-        - Mit dem Befehl `cf create-service p-mysql 20mb mysql` kann für Cloud Foundry Dev ein Datenbankservice mit dem Namen `mysql` erstellt werden. Dieser ist so auch in der `manifest.yml` des db-service erwähnt. Der Plan (`20mb`) und der Service (`p-mysql`) können für Cloud Foundry eventuell abweichen.
+        - Mit dem Ausführen des Befehls `cf dev deploy-service mysql` und im Anschluss `cf create-service p-mysql 20mb mysql` kann für Cloud Foundry Dev ein Datenbankservice mit dem Namen `mysql` erstellt werden. Dieser ist so auch in der `manifest.yml` des db-service erwähnt. Für Cloud Foundry würde der erste Befehl wegfallen und der Plan (`20mb`) und der Service (`p-mysql`) können eventuell abweichen.
         - Nach dem Deployment der App db-service muss der erstellte Service an die App gebunden werden mit `cf bind-service db-service mysql`.
         - Verifizieren des Bindings mit `cf service mysql`. db-service sollte jetzt gelistet sein unter bound apps.
     - Deployments
