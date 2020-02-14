@@ -26,12 +26,12 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
 - DB-Service: Informationen über Flüge
     - kommuniziert mit einer MySQL-Datenbank (Port 3306)
     - stellt Fluginformationen über einen API-Endpoint bereit
-    - Kommunikation mit API erfolgt über REST
+    - Kommunikation mit API erfolgt über REST (synchrone Kommunikation)
     - Port 8083
 - Data-Service: Informationen über Flugstatus
     - generiert Flugstatus pro Flugnummer zufällig (richtige Implementation hätte Rahmen des Projekts gesprengt)
     - stellt Flugstatusinformationen über einen API-Endpoint bereit
-    - Kommunikation mit API erfolgt über REST
+    - Kommunikation mit API erfolgt über REST (synchrone Kommunikation)
     - Port 8989
 
 #### Infrastrukturkomponenten
