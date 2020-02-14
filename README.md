@@ -116,18 +116,22 @@ Die Anwendung kann jetzt im Browser unter https://localhost:8080/flug (lokal) bz
 
 ![UI](UI.png)
 
-Flugnummern, für die Fluginformationen vorhanden sind:
+Flugnummern, für die Fluginformationen in der Datenbank vorhanden sind:
 
 AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T69KL5, X87UL1, OS57LM, EJU5907, LX981, AH67R45
 
 ### 2.5 Deployment
 
 - Cloud Foundry
-    - Für jeden Service gibt es eine `manifest.yml`, in der sich die Deployment-Konfigurationen für Cloud Foundry befinden. Die aktuelle Konfiguration setzt voraus, dass Cloud Foundry Dev verwendet wird (User `admin`, Org `cfdev-org`, Space `cfdev-space`). Die Konfigurationen können fast genau so wie sie sind auch für richtige Deployments auf Cloud Foundry genutzt werden, jedoch müssen die Umgebungsvariablen für alle URIs angepasst werden um dann die richtigen Routes zu repräsentieren.
+    - Für jeden Service gibt es eine `manifest.yml`, in der sich die Deployment-Konfigurationen für Cloud Foundry befinden. Die aktuelle Konfiguration setzt voraus, dass Cloud Foundry Dev verwendet wird (User `admin`, Org `cfdev-org`, Space `cfdev-space`). 
+    - Die Konfigurationen können fast genau so, wie sie sind, auch für richtige Deployments auf Cloud Foundry genutzt werden, jedoch müssen die Umgebungsvariablen für alle URIs angepasst werden um dann die richtigen Routes zu repräsentieren.
     - Datenbank
         - Mit dem Ausführen des Befehls `cf dev deploy-service mysql` und im Anschluss `cf create-service p-mysql 20mb mysql` kann für Cloud Foundry Dev ein Datenbankservice mit dem Namen `mysql` erstellt werden. Dieser ist so auch in der `manifest.yml` des db-service erwähnt. Für Cloud Foundry würde der erste Befehl wegfallen und der Plan (`20mb`) und der Service (`p-mysql`) können eventuell abweichen.
         - Der erstellte Datenbank-Service wird automatisch bei Deployment des db-service an ihn gebunden, da das in der `manifest.yml` so definiert ist.
-        - Verifizieren des Bindings mit `cf service mysql`. db-service sollte jetzt gelistet sein unter bound apps.
+        - Verifizieren des Bindings mit `cf service mysql`.
+        
+        ![DB-Binding](DB-Binding.png)
+        
     - Deployments
         - Build jedes Services durch Ausführen von `./gradlew clean build -x` im jeweiligen Verzeichnis oder Ausführen des Skripts `./build.sh` im root. Falls das Skript nicht läuft, muss eventuell erst `chmod u+x build.sh` ausgeführt werden.
         - Deployment jedes Services mit `cf push <app-name>` (ausführen im jeweiligen Verzeichnis).
