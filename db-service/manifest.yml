@@ -7,6 +7,7 @@ applications:
     services:
       - mysql
     memory: 1G
+    disk: 1G
     instances: 1
     hostname: db-service
     # wichtig: service startet langsam, health check darf nicht zu früh ausgeführt werden, sonst schlägt deployment fehl
