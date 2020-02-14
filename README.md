@@ -118,7 +118,7 @@ Die Anwendung kann jetzt im Browser unter https://localhost:8080/flug (lokal) bz
 
 Flugnummern, für die Fluginformationen vorhanden sind:
 
-AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T69KL5, X87UL1, OS57LM, EJU5907, LX981, BA8494
+AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T69KL5, X87UL1, OS57LM, EJU5907, LX981, AH67R45
 
 ### 2.5 Deployment
 
