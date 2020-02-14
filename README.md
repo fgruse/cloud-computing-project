@@ -139,7 +139,7 @@ AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T6
 - Deployments
     - Build jedes Services durch Ausführen von `./gradlew clean build -x` im jeweiligen Verzeichnis oder Ausführen des Skripts `./build.sh` im root. Falls das Skript nicht läuft, muss eventuell erst `chmod u+x build.sh` ausgeführt werden.
     - Deployment jedes Services mit `cf push <app-name>` (ausführen im jeweiligen Verzeichnis). 
-    - Erfolgreich gestartete App:
+    - Erfolgreich gestartete App (Beispiel Service-Discovery, 2 Instanzen):
     
     ![Successful-App-Start](Successful-App-Start.png)
     
@@ -154,7 +154,7 @@ AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T6
         - DB-Service: http://db-service.dev.cfdev.sh/ --> z.B. http://db-service.dev.cfdev.sh/api/flug/HRZ6785
 - Skalierbarkeit
     - Sowohl bei Cloud Foundry Dev als auch Cloud Foundry funktioniert das Skalieren ganz einfach. Mit dem Befehl `cf scale <app-name>` können mit `-i` Instanzen, mit `-k` Disk und mit `-m` Memory skaliert werden und das sogar während die Apps laufen.
-    - In der `manifest.yml` jeder App sind erstmal 2 Instanzen konfiguriert sowie 1GB Memory.
+    - In der `manifest.yml` jeder App sind erstmal 2 Instanzen konfiguriert sowie 1G Memory und 1G Disk. Das ist erstmal relativ großzügig und kann vermutlich zur Laufzeit runterskaliert werden.
     - Mit `cf apps` bekommt man einen Überblick über den derzeitigen Stand aller Apps:
     
     ![Cloud-Foundry-Skalierung](cloud-foundry-skalierung.png)
