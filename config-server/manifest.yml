@@ -7,4 +7,5 @@ applications:
     memory: 1G
     instances: 2
     hostname: config-server
-
+    # wichtig: service startet langsam, health check darf nicht zu früh ausgeführt werden, sonst schlägt deployment fehl
+    timeout: 180

@@ -7,6 +7,8 @@ applications:
     memory: 1G
     instances: 2
     hostname: service-discovery
+    # wichtig: service startet langsam, health check darf nicht zu früh ausgeführt werden, sonst schlägt deployment fehl
+    timeout: 180
     env:
       CONFIG_URI: http://config-server.dev.cfdev.sh
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-discovery.dev.cfdev.sh/eureka
