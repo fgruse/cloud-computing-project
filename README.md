@@ -117,7 +117,14 @@ AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T6
         - Deployment jedes Services mit `cf push <app-name>` (ausführen im jeweiligen Verzeichnis).
         - Wichtig: Der Config-Server muss als erstes deployed werden, da die anderen Services auf ihn angewiesen sind.
         - Wichtig: Die Datenbank muss erstellt sein, bevor der db-service deployed werden kann.
-        - Alle Services werden auf Port 8080 deployed. Dafür gibt es extra eine Config mit dem Profil `cloud`. 
+        - Alle Services werden auf Port 8080 deployed. Dafür gibt es extra eine Config mit dem Profil `cloud`.
+        - Zum Verifizieren dass alles funktioniert, kann auf http://ui-service.dev.cfdev.sh/flug die UI aufgerufen und benutzt werden. Alternativ kann jeder Service einzeln mit `curl` getestet werden.
+        - Wenn alle Deployments auf Cloud Foundry Dev erfolgreich waren, haben die Services folgende URIs:
+            - Config-Server: http://config-server.dev.cfdev.sh/ --> z.B. http://config-server.dev.cfdev.sh/ui-service/cloud
+            - Service-Discovery: http://service-discovery.dev.cfdev.sh/
+            - Data-Service: http://data-service.dev.cfdev.sh/ --> z.B. http://data-service.dev.cfdev.sh/api/status/HRZ6785
+            - UI-Service: http://ui-service.dev.cfdev.sh/flug
+            - DB-Service: http://db-service.dev.cfdev.sh/ --> z.B. http://db-service.dev.cfdev.sh/api/flug/HRZ6785
 - Skalierbarkeit: mit Cloud Foundry
     - Sowohl bei Cloud Foundry Dev als auch Cloud Foundry funktioniert das Skalieren ganz einfach. Mit dem Befehl `cf scale <app-name>` können mit `-i` Instanzen, mit `-k` Disk und mit `-m` Memory skaliert werden und das sogar während die Apps laufen.
     - In der `manifest.yml` jeder App sind erstmal 2 Instanzen konfiguriert sowie 1GB Memory.
