@@ -124,3 +124,8 @@ AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T6
     - Mit `cf apps` bekommt man einen Überblick über den derzeitigen Stand aller Apps. 
     
     ![Cloud-Foundry-Skalierung](cloud-foundry-skalierung.png)
+    
+    - Auch mit Eureka kann verifiziert werden, wie viele Instanzen aktiv sind.
+    
+    ![Eureka-Instanzen](Eureka-Instanzen.png)
+    
