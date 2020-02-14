@@ -55,6 +55,7 @@ Mit unserer Anwendung kann ein Nutzer sich aktuelle Informationen zu bevorstehen
     - Dadurch dass keine Requests mehr durchgelassen werden (Circuit Open), sobald Fehler auftreten, haben die Services gegebenenfalls Zeit sich zu erholen. Es werden aber Fallbacks genutzt, damit der Service zumindest weiterhin halbwegs nutzbar und informativ bleibt.
     - Die derzeitige Konfiguration vom Circuit Breaker ist nicht unbedingt Production-geeignet, macht es aber möglich, das Verhalten zu beobachten. Mit Hilfe des Hystrix Dashboards geht das ganz leicht. Dazu muss einfach http://localhost:8080/hystrix/ http:// aufgerufen werden und der Stream `http://localhost:8080/actuator/hystrix.stream` (manuell gestartet mit Gradle) bzw. `http://config-server:8080/actuator/hystrix.stream` (gestartet mit Skript/ Docker Compose) gemonitored werden (bei Deployment natürlich die entsprechenden URIs verwenden). Wenn man nun Requests sendet und z.B. der Data-Service oder der DB-Service offline ist, schlagen diese fehl, der Circuit ist dann geöffnet und weitere Requests innerhalb der nächsten 10sek werden nicht mehr ausgeführt.
     - Die Hystrix-Command-Config befindet sich in `config-server/configs/ui-service.properties` und kann separat für Fluginfo (DB-Service) und Flugstatus (Data-Service) angepasst werden.
+    - Hystrix-Dashboard Beispiel: Der DB-Service (Fluginfo) ist offline und es wurden kurz hintereinander zwei Anfragen gesendet. Beim Flugstatus sehen wir Circuit Closed und zwei erfolgreiche Anfragen. Bei der Fluginfo sehen wir ein Failure, was dazu geführt hat, dass der Circuit Open, was wiederum dazu geführt hat, dass die zweite Anfrage gar nicht mehr zum DB-Service durchgegangen ist (short-circuited).
     
     ![Hystrix Dashboard Circuit Open](Hystrix-Dashboard-Circuit-Open.png)
     
@@ -126,17 +127,21 @@ AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T6
     - Für jeden Service gibt es eine `manifest.yml`, in der sich die Deployment-Konfigurationen für Cloud Foundry befinden. Die aktuelle Konfiguration setzt voraus, dass Cloud Foundry Dev verwendet wird (User `admin`, Org `cfdev-org`, Space `cfdev-space`). 
     - Die Konfigurationen können fast genau so, wie sie sind, auch für richtige Deployments auf Cloud Foundry genutzt werden, jedoch müssen die Umgebungsvariablen für alle URIs angepasst werden um dann die richtigen Routes zu repräsentieren.
     - Datenbank
-        - Mit dem Ausführen des Befehls `cf dev deploy-service mysql` und im Anschluss `cf create-service p-mysql 20mb mysql` kann für Cloud Foundry Dev ein Datenbankservice mit dem Namen `mysql` erstellt werden. Dieser ist so auch in der `manifest.yml` des db-service erwähnt. Für Cloud Foundry würde der erste Befehl wegfallen und der Plan (`20mb`) und der Service (`p-mysql`) können eventuell abweichen.
-        - Der erstellte Datenbank-Service wird automatisch bei Deployment des db-service an ihn gebunden, da das in der `manifest.yml` so definiert ist.
-        - Verifizieren des Bindings mit `cf service mysql`.
+        - Mit dem Ausführen des Befehls `cf dev deploy-service mysql` und im Anschluss `cf create-service p-mysql 20mb mysql` kann für Cloud Foundry Dev ein Datenbankservice mit dem Namen `mysql` erstellt werden. Dieser ist so auch in der `manifest.yml` des DB-Services erwähnt. Für Cloud Foundry würde der erste Befehl wegfallen und der Plan (`20mb`) und der Service (`p-mysql`) können eventuell abweichen.
+        - Der erstellte Datenbank-Service wird automatisch bei Deployment des DB-Services an ihn gebunden, da das in der `manifest.yml` so definiert ist.
+        - Verifizieren des Bindings mit `cf service mysql`:
         
         ![DB-Binding](DB-Binding.png)
         
     - Deployments
         - Build jedes Services durch Ausführen von `./gradlew clean build -x` im jeweiligen Verzeichnis oder Ausführen des Skripts `./build.sh` im root. Falls das Skript nicht läuft, muss eventuell erst `chmod u+x build.sh` ausgeführt werden.
-        - Deployment jedes Services mit `cf push <app-name>` (ausführen im jeweiligen Verzeichnis).
+        - Deployment jedes Services mit `cf push <app-name>` (ausführen im jeweiligen Verzeichnis). 
+        - Erfolgreich gestartete App:
+        
+        ![Successful-App-Start](Successful-App-Start.png)
+        
         - Wichtig: Der Config-Server muss als erstes deployed werden, da die anderen Services auf ihn angewiesen sind.
-        - Wichtig: Die Datenbank muss erstellt sein, bevor der db-service deployed werden kann.
+        - Wichtig: Die Datenbank muss erstellt sein, bevor der DB-Service deployed werden kann.
         - Alle Services werden auf Port 8080 deployed. Dafür gibt es extra eine Config mit dem Profil `cloud`.
         - Wenn alle Deployments auf Cloud Foundry Dev erfolgreich waren, haben die Services folgende URIs:
             - Config-Server: http://config-server.dev.cfdev.sh/ --> z.B. http://config-server.dev.cfdev.sh/ui-service/cloud
@@ -147,11 +152,11 @@ AB459DZ, HRZ6785, EJEK753, LIR0912, JJK8865, KKF890, ABC1234, JB007, GRI6543, T6
 - Skalierbarkeit: mit Cloud Foundry
     - Sowohl bei Cloud Foundry Dev als auch Cloud Foundry funktioniert das Skalieren ganz einfach. Mit dem Befehl `cf scale <app-name>` können mit `-i` Instanzen, mit `-k` Disk und mit `-m` Memory skaliert werden und das sogar während die Apps laufen.
     - In der `manifest.yml` jeder App sind erstmal 2 Instanzen konfiguriert sowie 1GB Memory.
-    - Mit `cf apps` bekommt man einen Überblick über den derzeitigen Stand aller Apps. 
+    - Mit `cf apps` bekommt man einen Überblick über den derzeitigen Stand aller Apps:
     
     ![Cloud-Foundry-Skalierung](cloud-foundry-skalierung.png)
     
-    - Auch mit Eureka kann verifiziert werden, wie viele Instanzen aktiv sind.
+    - Auch mit Eureka kann verifiziert werden, wie viele Instanzen aktiv sind:
     
     ![Eureka-Instanzen](Eureka-Instanzen.png)
     
