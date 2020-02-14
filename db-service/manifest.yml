@@ -15,5 +15,4 @@ applications:
     env:
       CONFIG_URI: http://config-server.dev.cfdev.sh
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-discovery.dev.cfdev.sh/eureka
-      #DB_URI: jdbc:mysql://mysql-db:3306/flights?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
 
