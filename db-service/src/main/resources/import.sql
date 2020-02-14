@@ -12,4 +12,4 @@ INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALU
 INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("OS57LM", "Ryanair", "Berlin", "Amsterdam", "2020-04-20", "08:30");
 INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("EJU5907", "EasyJet", "Berlin", "Köln/Bonn", "2020-02-11", "05:50");
 INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("LX981", "Lufthansa", "Berlin", "Wien", "2020-07-09", "20:05");
-INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("BA8494", "British Airways", "Berlin", "Reykjavík", "2020-12-30", "01:45");
+INSERT INTO flugstatus (flugnummer, airline, von, nach, flugdatum, uhrzeit) VALUES ("AH67R45", "British Airways", "Berlin", "Reykjavík", "2020-12-30", "01:45");
