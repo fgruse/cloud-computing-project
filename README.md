@@ -1,6 +1,6 @@
 # Cloud Computing Project
 
-von [Laura Zaworski](https://github.com/LauraZaworski), [Sophie Schröder](https://github.com/sophieschrder), [Anna-Frieda Gruse](https://github.com/cosmoem)
+von [Laura Zaworski](https://github.com/LauraZaworski), [Sophie Schröder](https://github.com/sophieschrder), [Anna-Frieda Gruse](https://github.com/fgruse)
 
 Dieses Projekt ist im Rahmen der Lehrveranstaltung "Verteilte System" an der HTW Berlin im WS 19/20 entstanden.
 
